@@ -29,18 +29,25 @@ def showCharts():
                     title='Correlation Between KD and Win Rate')
     plt.show()
 
+try:
+    # Some code that might raise an exception
+    original_df.plot(
+        kind='bar',
+        x='KD',
+        y='Win Rate',
+        color='blue',
+        alpha=0.3,
+        title='Correlation Between KD and Win Rate')
+    plt.show()
 except Exception as e:
-print('error lol')
-print(f'caught {e=}, {type(e)=}')
-
-def userOptions():
-    global quit
+    print('Error occurred while showing charts')
+    print(f'Caught {e=}, {type(e)=}')
 
     print("""Welcome to the Big Mac Data Extraordinaire!
           
     Please select an option:
     1 - Show the original dataset
-    2 - 
+    2 - Show data for specific
     3 - Visualise the correlation between KD and Win Rate
     4 - Quit Program
         """)
@@ -62,8 +69,27 @@ def userOptions():
     except:
         print('Enter a number, it is not that hard.')
 
+
+
    
 
 #----Main program----#
-while not quit:
-    userOptions()
+#while not quit:
+def userOptions():
+    options = {
+        1: ("Show the original dataset", showOriginalData),
+        2: ("Show data for a specific week", showWeekData),
+        3: ("Visualise the correlation between KD and Win Rate", showCharts),
+        4: ("Quit Program", None)
+    }
+    
+def main():
+    global quit
+    print("Welcome to the Valorant Stats Analyzer!")
+    while not quit:
+        userOptions()
+    print("Thank you for using the Valorant Stats Analyzer. Goodbye!")
+
+if __name__ == "__main__":
+    main()
+
